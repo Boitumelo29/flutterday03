@@ -10,23 +10,36 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  double _fontSize = 40;
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-            child: Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextField(
-                maxLines: null,
-                textInputAction: TextInputAction.done,
-              ),
-            ],
-          ),
-        )),
+        body: SingleChildScrollView(
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(
+                  style: TextStyle(fontSize: _fontSize),
+                  maxLines: null,
+                  textInputAction: TextInputAction.done,
+                ),
+                Slider(
+                    min: 30,
+                    max: 300,
+                    value: _fontSize,
+                    onChanged: (newSize) {
+                      setState(() {
+                        _fontSize = newSize;
+                      });
+                    })
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }
